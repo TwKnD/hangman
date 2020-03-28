@@ -11,8 +11,9 @@ for i in range(0, len(secret)):
 
 
 def nextRound():
+    print('\n', '\n')
     print(stages[wrongGuessNum])
-    print('\n')
+    print('\n', '\n')
     print("Lives left: " + str((5 - wrongGuessNum)))
     print(*wordOut)
 
@@ -38,7 +39,6 @@ def updateOut(char):
 
 
 while wrongGuessNum < 5:
-    print('\n', '\n')
     nextGuess = input("Your guess: ")[:1]
     check = secret.find(nextGuess)
     # correct guess
