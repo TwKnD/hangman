@@ -5,6 +5,7 @@ wordOut = ["_"] * len(secret)
 wordCheck = []
 lives = 5
 wrongGuessList = []
+firstRound = True
 
 for i in range(0, len(secret)):
     wordCheck.append(str(secret[i:i+1]))
@@ -16,7 +17,6 @@ def nextRound():
         loser()
     else:
         print('\n', '\n')
-        print(5 - lives)
         print(stages[5 - lives])
         print('\n', '\n')
         print("Lives left: " + str((lives)))
@@ -74,6 +74,9 @@ def checkChar(char):
 
 
 while lives > -1:
+    if firstRound:
+        firstRound = False
+        nextRound()
     nextGuess = input("Your guess: ")
     guessWord = nextGuess == secret
     guessChar = secret.find(nextGuess)
