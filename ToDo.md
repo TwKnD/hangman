@@ -1,1 +1,3 @@
  - add restart sequence.
+ - add secret list
+ - create function to randomly select secret
