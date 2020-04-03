@@ -1,3 +1,3 @@
- - add restart sequence.
- - add secret list
- - create function to randomly select secret
+ - add new game option
+  - add win rate tracking
+  
