@@ -3,7 +3,7 @@ from hangingMan import stages
 secret = 'hangman'
 wordOut = ["_"] * len(secret)
 wordCheck = []
-wrongGuessNum = 0
+lives = 6
 wrongGuessList = []
 
 for i in range(0, len(secret)):
@@ -12,10 +12,11 @@ for i in range(0, len(secret)):
 
 def nextRound():
     print('\n', '\n')
-    print(stages[wrongGuessNum])
+    print(stages[lives])
     print('\n', '\n')
-    print("Lives left: " + str((5 - wrongGuessNum)))
+    print("Lives left: " + str((5 - lives)))
     print(*wordOut)
+    print('Guessed:', *wrongGuessList)
 
 
 def winner():
@@ -38,22 +39,42 @@ def updateOut(char):
         index += 1
 
 
-while wrongGuessNum < 5:
-    nextGuess = input("Your guess: ")[:1]
-    check = secret.find(nextGuess)
+# check word guesses
+def checkWord(match):
+    global lives
+    if match:
+        winner()
+        lives = 0
+    else:
+        lives -= 1
+        nextRound()
+
+
+def checkChar(char):
+    global lives
     # correct guess
-    if check != -1:
+    if guessChar != -1:
         updateOut(nextGuess)
         if ''.join(wordOut) == secret:
             winner()
-            break
+            lives = 0
         else:
             nextRound()
     # incorrect guess
     else:
-        wrongGuessNum += 1
+        lives -= 1
         wrongGuessList.append(nextGuess)
         nextRound()
+
+while lives > 0:
+    nextGuess = input("Your guess: ")
+    guessWord = nextGuess == secret
+    guessChar = secret.find(nextGuess)
+    if len(nextGuess) > 1:
+        checkWord(guessWord)
+    else:
+        checkChar(guessChar)
+
 
 print('\n', '\n')
 loser()
