@@ -16,21 +16,25 @@ def nextRound():
         print('\n \n \n')
         loser()
     else:
-        print('\n', '\n')
-        print(stages[5 - lives])
-        print('\n', '\n')
+        print('\n \n')
         print("Lives left: " + str((lives)))
+        print('\n')
+        print(stages[5 - lives])
+        print('\n \n')
         print(*wordOut)
         print('Guessed:', *wrongGuessList)
 
 
 def winner():
     print('\n \n \n')
+    print(stages[7])
     print("Congratulations !!")
     print('The word was:', secret)
 
 
 def loser():
+    print('\n \n \n')
+    print(stages[6])
     print("Sorry, You lose :(")
     print("The Word was: " + secret)
 
