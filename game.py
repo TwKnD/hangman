@@ -1,17 +1,17 @@
 from hangingMan import stages
 
 secret = 'hangman'
-wordOut = ["_"] * len(secret)
-wordCheck = []
+secret_reveal = ["_"] * len(secret)
+secret_check = []
 lives = 5
-wrongGuessList = []
-firstRound = True
+incorrect_list = []
+first_round = True
 
 for i in range(0, len(secret)):
-    wordCheck.append(str(secret[i:i+1]))
+    secret_check.append(str(secret[i:i+1]))
 
 
-def nextRound():
+def next_round():
     if lives == -1:
         print('\n \n \n')
         loser()
@@ -21,8 +21,8 @@ def nextRound():
         print('\n')
         print(stages[5 - lives])
         print('\n \n')
-        print(*wordOut)
-        print('Guessed:', *wrongGuessList)
+        print(*secret_reveal)
+        print('Guessed:', *incorrect_list)
 
 
 def winner():
@@ -39,52 +39,52 @@ def loser():
     print("The Word was: " + secret)
 
 
-def updateOut(char):
+def update_reveal(char):
     index = 0
     while index < len(secret):
         index = secret.find(char, index)
         if index == -1:
             break
-        wordOut[index] = nextGuess
+        secret_reveal[index] = player_guess
         index += 1
 
 
 # check word guesses
-def checkWord(match):
+def check_word(match):
     global lives
     if match:
         lives = -1
         winner()
     else:
         lives -= 1
-        nextRound()
+        next_round()
 
 
-def checkChar(char):
+def check_char(char):
     global lives
     # correct guess
-    if guessChar != -1:
-        updateOut(nextGuess)
-        if ''.join(wordOut) == secret:
+    if guessed_char != -1:
+        update_reveal(player_guess)
+        if ''.join(secret_reveal) == secret:
             lives = -1
             winner()
         else:
-            nextRound()
+            next_round()
     # incorrect guess
     else:
         lives -= 1
-        wrongGuessList.append(nextGuess)
-        nextRound()
+        incorrect_list.append(player_guess)
+        next_round()
 
 
 while lives > -1:
-    if firstRound:
-        firstRound = False
-        nextRound()
-    nextGuess = input("Your guess: ")
-    guessWord = nextGuess == secret
-    guessChar = secret.find(nextGuess)
-    if len(nextGuess) > 1:
-        checkWord(guessWord)
+    if first_round:
+        first_round = False
+        next_round()
+    player_guess = input("Your guess: ")
+    guessed_word = player_guess == secret
+    guessed_char = secret.find(player_guess)
+    if len(player_guess) > 1:
+        check_word(guessed_word)
     else:
-        checkChar(guessChar)
+        check_char(guessed_char)
