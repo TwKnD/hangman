@@ -1,6 +1,8 @@
-from hangingMan import stages
+from numpy import random
+from gallows import stages
+from words import secret_list
 
-secret = 'hangman'
+secret = random.choice(secret_list)
 secret_reveal = ["_"] * len(secret)
 secret_check = []
 lives = 5
