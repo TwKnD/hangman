@@ -1,8 +1,8 @@
 from numpy import random
-from gallows import stages
-from words import secret_list
+from gallows import STAGES
+from words import SECRET_LIST
 
-secret = random.choice(secret_list)
+secret = random.choice(SECRET_LIST)
 secret_reveal = ["_"] * len(secret)
 secret_check = []
 lives = 5
@@ -21,7 +21,7 @@ def next_round():
         print('\n \n')
         print("Lives left: " + str((lives)))
         print('\n')
-        print(stages[5 - lives])
+        print(STAGES[5 - lives])
         print('\n \n')
         print(*secret_reveal)
         print('Guessed:', *incorrect_list)
@@ -29,14 +29,14 @@ def next_round():
 
 def winner():
     print('\n \n \n')
-    print(stages[7])
+    print(STAGES[7])
     print("Congratulations !!")
     print('The word was:', secret)
 
 
 def loser():
     print('\n \n \n')
-    print(stages[6])
+    print(STAGES[6])
     print("Sorry, You lose :(")
     print("The Word was: " + secret)
 

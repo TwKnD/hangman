@@ -1,4 +1,9 @@
-secret_list = [
+"""
+This File contains a list of words
+for the game to randomly select form at start.
+"""
+
+SECRET_LIST = [
     "innovative",
     "bustling",
     "adorable",
