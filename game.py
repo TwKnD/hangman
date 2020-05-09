@@ -1,3 +1,7 @@
+'''
+Hangman terminal game.
+Author: TwKnD
+'''
 from numpy import random
 from gallows import STAGES
 from words import SECRET_LIST
@@ -14,6 +18,9 @@ for i in range(0, len(secret)):
 
 
 def next_round():
+    '''
+    Prints gallows, lives, guesses, etc
+    '''
     if lives == -1:
         print('\n \n \n')
         loser()
@@ -28,6 +35,9 @@ def next_round():
 
 
 def winner():
+    '''
+    Prints on win condition
+    '''
     print('\n \n \n')
     print(STAGES[7])
     print("Congratulations !!")
@@ -35,6 +45,9 @@ def winner():
 
 
 def loser():
+    '''
+    Prints on lose condition
+    '''
     print('\n \n \n')
     print(STAGES[6])
     print("Sorry, You lose :(")
@@ -42,6 +55,9 @@ def loser():
 
 
 def update_reveal(char):
+    '''
+    Reveals character in list if correct
+    '''
     index = 0
     while index < len(secret):
         index = secret.find(char, index)
@@ -51,8 +67,10 @@ def update_reveal(char):
         index += 1
 
 
-# check word guesses
 def check_word(match):
+    '''
+    Checks word guesses
+    '''
     global lives
     if match:
         lives = -1
@@ -62,7 +80,10 @@ def check_word(match):
         next_round()
 
 
-def check_char(char):
+def check_char(guessed_char):
+    '''
+    checks single letter guesses
+    '''
     global lives
     # correct guess
     if guessed_char != -1:
@@ -79,6 +100,7 @@ def check_char(char):
         next_round()
 
 
+# Main Game Loop
 while lives > -1:
     if first_round:
         first_round = False
