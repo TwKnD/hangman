@@ -2,6 +2,7 @@
 Hangman terminal game.
 Author: TwKnD
 '''
+import os
 from numpy import random
 from gallows import STAGES
 from words import SECRET_LIST
@@ -22,10 +23,11 @@ def next_round():
     Prints gallows, lives, guesses, etc
     '''
     if lives == -1:
-        print('\n \n \n')
+        os.system('clear')
         loser()
     else:
-        print('\n \n')
+        # print('\n \n')
+        os.system('clear')
         print("Lives left: " + str((lives)))
         print('\n')
         print(STAGES[5 - lives])
@@ -38,7 +40,7 @@ def winner():
     '''
     Prints on win condition
     '''
-    print('\n \n \n')
+    os.system('clear')
     print(STAGES[7])
     print("Congratulations !!")
     print('The word was:', secret)
@@ -48,7 +50,8 @@ def loser():
     '''
     Prints on lose condition
     '''
-    print('\n \n \n')
+    # print('\n \n \n')
+    os.system('clear')
     print(STAGES[6])
     print("Sorry, You lose :(")
     print("The Word was: " + secret)
@@ -69,7 +72,7 @@ def update_reveal(char):
 
 def check_word(match):
     '''
-    Checks word guesses
+    Checks multi character guesses
     '''
     global lives
     if match:
@@ -80,21 +83,23 @@ def check_word(match):
         next_round()
 
 
-def check_char(guessed_char):
+def check_char(char):
     '''
     checks single letter guesses
     '''
     global lives
-    # correct guess
-    if guessed_char != -1:
+
+    if char != -1:
+        # correct guess
         update_reveal(player_guess)
         if ''.join(secret_reveal) == secret:
             lives = -1
             winner()
         else:
             next_round()
-    # incorrect guess
+
     else:
+    # incorrect guess
         lives -= 1
         incorrect_list.append(player_guess)
         next_round()
